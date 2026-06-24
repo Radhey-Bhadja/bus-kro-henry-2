@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horrid Henry — The Ultimate Character Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050508;
+            --surface: rgba(255, 255, 255, 0.03);
+            --surface-hover: rgba(255, 255, 255, 0.07);
+            --border: rgba(255, 255, 255, 0.08);
+            --neon-pink: #ff2a6d;
+            --neon-purple: #b026ff;
+            --neon-cyan: #05d9e8;
+            --neon-yellow: #ffe66d;
+            --neon-green: #00f5d4;
+            --text: #f0f0f0;
+            --text-dim: #8892b0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--neon-purple), var(--neon-pink));
+            border-radius: 4px;
+        }
+
+        /* Neon Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-text-yellow {
+            background: linear-gradient(135deg, var(--neon-yellow), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(5, 5, 8, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple));
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 120px 20px 80px;
+        }
+
+        #particleCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 42, 109, 0.1);
+            border: 1px solid rgba(255, 42, 109, 0.3);
+            border-radius: 50px;
+            color: var(--neon-pink);
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease 0.2s both;
+            letter-spacing: -2px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 700px;
+            margin: 40px auto 0;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(176, 38, 255, 0.2);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: var(--text-dim);
+            font-size: 1.5rem;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            padding: 100px 20px 60px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 50px 100px;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: 0.4s;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple));
+            transform: scaleX(0);
+            transition: 0.4s;
+        }
+
+        .stat-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: var(--text-dim);
+            font-weight: 600;
+            margin-top: 10px;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Characters Grid */
+        .characters {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 50px 100px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .character-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .character-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .character-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 24px;
+            opacity: 0;
+            transition: 0.4s;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .character-card:hover::after {
+            opacity: 1;
+            box-shadow: inset 0 0 30px rgba(176, 38, 255, 0.1);
+        }
+
+        .char-image-wrap {
+            height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .char-image-wrap::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, var(--card-glow) 0%, transparent 70%);
+            opacity: 0.3;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .char-image-wrap img {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            position: relative;
+            z-index: 2;
+            transition: 0.4s;
+        }
+
+        .character-card:hover .char-image-wrap img {
+            transform: scale(1.1);
+            border-color: var(--card-glow);
+            box-shadow: 0 0 30px var(--card-glow);
+        }
+
+        .char-info {
+            padding: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .char-emoji {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .char-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .char-role {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-dim);
+        }
+
+        .char-tagline {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 5, 8, 0.9);
+            backdrop-filter: blur(20px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.4s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 50px;
+            position: relative;
+            transform: scale(0.9) translateY(20px);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .modal-close:hover {
+            color: var(--neon-pink);
+            background: rgba(255, 42, 109, 0.1);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .modal-img {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            border-radius: 50%;
+            border: 3px solid var(--border);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+        }
+
+        .modal-title h3 {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+        }
+
+        .modal-title .role {
+            color: var(--text-dim);
+            font-weight: 600;
+        }
+
+        .modal-traits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .trait-pill {
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+        }
+
+        .modal-desc {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Episodes Timeline */
+        .episodes {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 50px 100px;
+            position: relative;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--neon-purple), var(--neon-pink), var(--neon-cyan));
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 50%;
+            position: relative;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: 50%;
+            transform: translateX(30px);
+        }
+
+        .timeline-item:nth-child(even).visible {
+            transform: translateX(0);
+        }
+
+        .timeline-content {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 400px;
+            margin: 0 40px;
+            position: relative;
+            transition: 0.4s;
+        }
+
+        .timeline-content:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--bg);
+            border: 3px solid var(--neon-purple);
+            border-radius: 50%;
+            top: 35px;
+            z-index: 2;
+            box-shadow: 0 0 20px rgba(176, 38, 255, 0.5);
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 20px rgba(255, 42, 109, 0.5);
+        }
+
+        .timeline-year {
+            display: inline-block;
+            padding: 5px 15px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .timeline-content p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        .ep-count {
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: 700;
+            color: var(--neon-cyan);
+        }
+
+        /* Books Section */
+        .books {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 50px 100px;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .book-visual {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .book-3d {
+            width: 280px;
+            margin: 0 auto;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: bookFloat 5s ease-in-out infinite;
+        }
+
+        .book-3d img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5), 0 0 40px rgba(176, 38, 255, 0.3);
+            border: 1px solid var(--border);
+        }
+
+        .book-info h3 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .book-info p {
+            color: var(--text-dim);
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .book-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .book-list li {
+            padding: 12px 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            border-left: 3px solid var(--neon-purple);
+        }
+
+        .book-list li:hover {
+            background: var(--surface-hover);
+            transform: translateX(5px);
+            border-left-color: var(--neon-pink);
+        }
+
+        .author-credit {
+            margin-top: 30px;
+            padding: 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .author-credit .icon {
+            font-size: 2.5rem;
+        }
+
+        .author-credit div strong {
+            color: var(--text);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .author-credit div span {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 60px 50px 30px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        footer p {
+            color: var(--text-dim);
+            margin-bottom: 30px;
+        }
+
+        .footer-stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .footer-stat {
+            text-align: center;
+        }
+
+        .footer-stat .num {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--neon-yellow);
+        }
+
+        .footer-stat .label {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        @keyframes bookFloat {
+            0%, 100% { transform: translateY(0) rotateY(0deg); }
+            50% { transform: translateY(-15px) rotateY(5deg); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(176, 38, 255, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(176, 38, 255, 0.6); }
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .books { grid-template-columns: 1fr; }
+            .timeline-line { left: 20px; }
+            .timeline-item, .timeline-item:nth-child(even) {
+                justify-content: flex-start;
+                padding-left: 60px;
+                padding-right: 0;
+            }
+            .timeline-dot { left: 20px; transform: none; }
+            nav { padding: 15px 20px; }
+            .nav-links { display: none; }
+            .characters { padding: 0 20px 80px; }
+            .stats { padding: 0 20px 80px; }
+            .episodes { padding: 0 20px 80px; }
+            .books { padding: 0 20px 80px; }
+            .modal-header { flex-direction: column; text-align: center; }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-logo gradient-text">HORRID HENRY</div>
+        <ul class="nav-links">
+            <li><a href="#characters">Characters</a></li>
+            <li><a href="#episodes">Episodes</a></li>
+            <li><a href="#books">Books</a></li>
+            <li><a href="#stats">Stats</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <canvas id="particleCanvas"></canvas>
+        <div class="hero-content">
+            <div class="hero-badge">⚡ The Most Horrid Website Ever ⚡</div>
+            <h1 class="gradient-text">HORRID HENRY</h1>
+            <p class="hero-subtitle">Explore every scheming, shouting, sneaky character from the world's most gloriously misbehaved TV show. <strong>15 characters. 250 episodes. 24+ books.</strong></p>
+            <div class="hero-image">
+                <img src="https://kimi-web-img.moonshot.cn/img/www.animationmagazine.net/ca3e007b9ebae3e6f7d91cbe12ced6ffbe3addb9.jpg" alt="Horrid Henry Cast">
+            </div>
+        </div>
+        <div class="scroll-indicator">↓</div>
+    </section>
+
+    <!-- Stats -->
+    <section id="stats">
+        <div class="section-header reveal">
+            <h2 class="gradient-text-yellow">By The Numbers</h2>
+            <p>The sheer scale of horridness across books, TV, and beyond.</p>
+        </div>
+        <div class="stats">
+            <div class="stat-card reveal">
+                <div class="stat-icon">👥</div>
+                <div class="stat-number" data-target="15">0</div>
+                <div class="stat-label">Main Characters</div>
+            </div>
+            <div class="stat-card reveal">
+                <div class="stat-icon">📺</div>
+                <div class="stat-number" data-target="250">0</div>
+                <div class="stat-label">TV Episodes</div>
+            </div>
+            <div class="stat-card reveal">
+                <div class="stat-icon">📚</div>
+                <div class="stat-number" data-target="24">0</div>
+                <div class="stat-label">Book Titles</div>
+            </div>
+            <div class="stat-card reveal">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-number" data-target="5">0</div>
+                <div class="stat-label">TV Seasons</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Characters -->
+    <section id="characters">
+        <div class="section-header reveal">
+            <h2 class="gradient-text">The Characters</h2>
+            <p>15 unforgettable characters — click any card to reveal their full profile.</p>
+        </div>
+        <div class="characters" id="characterGrid"></div>
+    </section>
+
+    <!-- Episodes -->
+    <section id="episodes">
+        <div class="section-header reveal">
+            <h2 class="gradient-text-yellow">TV Series Timeline</h2>
+            <p>From 2006 to 2019 — five seasons of horrid adventures on CITV and Nicktoons.</p>
+        </div>
+        <div class="episodes">
+            <div class="timeline-line"></div>
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">2006 — 2007</span>
+                    <h3>Season 1</h3>
+                    <p>The chaos begins! 52 episodes introducing Henry, Peter, Margaret, and the whole gang. Premiered on CITV.</p>
+                    <span class="ep-count">52 Episodes</span>
+                </div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">2008 — 2009</span>
+                    <h3>Season 2</h3>
+                    <p>Another 52 episodes. Henry's pranks get bigger, the Secret Club gets stronger, and the Purple Hand Gang fights back!</p>
+                    <span class="ep-count">52 Episodes</span>
+                </div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">2010 — 2011</span>
+                    <h3>Season 3</h3>
+                    <p>52 more episodes! Aired alongside the 2011 live-action movie "Horrid Henry: The Movie" in 3D.</p>
+                    <span class="ep-count">52 Episodes</span>
+                </div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">2014 — 2015</span>
+                    <h3>Season 4</h3>
+                    <p>Another 52 episodes bringing the total to 208. Henry becomes more of a scapegoat while Margaret gets more devious.</p>
+                    <span class="ep-count">52 Episodes</span>
+                </div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">2018 — 2019</span>
+                    <h3>Season 5</h3>
+                    <p>Final 42 episodes on Nicktoons UK. The series became the #3 most-watched animation in Britain!</p>
+                    <span class="ep-count">42 Episodes</span>
+                </div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">2011 & 2020+</span>
+                    <h3>Movie & Specials</h3>
+                    <p>Live-action 3D movie in 2011, followed by Netflix specials like "Gross Day Out" and "Wild Weekend" from 2020.</p>
+                    <span class="ep-count">Bonus Content</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Books -->
+    <section id="books">
+        <div class="section-header reveal">
+            <h2 class="gradient-text">The Book Series</h2>
+            <p>Written by Francesca Simon and illustrated by the legendary Tony Ross since 1994.</p>
+        </div>
+        <div class="books">
+            <div class="book-visual reveal">
+                <div class="book-3d">
+                    <img src="https://kimi-web-img.moonshot.cn/img/d3ddkgxe55ca6c.cloudfront.net/4e95fd28ad4d42c9c806811f7c1316dc6d998bd2.jpg" alt="Horrid Henry Book">
+                </div>
+            </div>
+            <div class="book-info reveal">
+                <h3 class="gradient-text-yellow">24+ Bestselling Titles</h3>
+                <p>The Horrid Henry book series has sold over <strong>25 million copies</strong> worldwide! Published by Orion Children's Books, translated into 24 languages, and winner of countless awards.</p>
+                <p>From the original <em>Horrid Henry</em> (1994) to <em>Horrid Henry: Up, Up and Away</em> (2019), follow Henry's most horrid moments in short, hilarious chapters perfect for reluctant readers.</p>
+                <ul class="book-list">
+                    <li>Horrid Henry (1994)</li>
+                    <li>Horrid Henry and the Secret Club (1995)</li>
+                    <li>Horrid Henry Tricks the Tooth Fairy (1996)</li>
+                    <li>Horrid Henry's Nits (1997)</li>
+                    <li>Horrid Henry Gets Rich Quick (2000)</li>
+                    <li>Horrid Henry's Haunted House (1999)</li>
+                    <li>Horrid Henry and the Mummy's Curse (2001)</li>
+                    <li>Horrid Henry's Revenge (2001)</li>
+                    <li>Horrid Henry and the Bogey Babysitter (2002)</li>
+                    <li>Horrid Henry's Stinkbomb (2002)</li>
+                    <li>Horrid Henry's Underpants (2003)</li>
+                    <li>Horrid Henry Meets the Queen (2004)</li>
+                </ul>
+                <div class="author-credit">
+                    <div class="icon">✍️</div>
+                    <div>
+                        <strong>Francesca Simon & Tony Ross</strong>
+                        <span>Author & Illustrator — Over 25 million copies sold worldwide</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo gradient-text">HORRID HENRY</div>
+        <p>Created with 😈 for fans of the world's most horrid boy!</p>
+        <div class="footer-stats">
+            <div class="footer-stat">
+                <div class="num">15</div>
+                <div class="label">Characters</div>
+            </div>
+            <div class="footer-stat">
+                <div class="num">29</div>
+                <div class="label">Book Series</div>
+            </div>
+            <div class="footer-stat">
+                <div class="num">250</div>
+                <div class="label">TV Episodes</div>
+            </div>
+            <div class="footer-stat">
+                <div class="num">1</div>
+                <div class="label">True King</div>
+            </div>
+        </div>
+        <p style="font-size: 0.85rem; opacity: 0.5;">Based on the series by Francesca Simon & Tony Ross. TV series by Novel Entertainment & Nelvana.</p>
+    </footer>
+
+    <!-- Character Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content" id="modalContent">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        // Character Data
+        const characters = [
+            {
+                id: 'henry', name: 'Horrid Henry', emoji: '😈', role: 'Main Character',
+                tagline: 'The King of Horridness',
+                image: 'https://kimi-web-img.moonshot.cn/img/static.wikia.nocookie.net/ccbd5562c45273e23775c29b8cb657e5795c9358',
+                glow: '#ff2a6d',
+                traits: ['Scheming', 'Loud', 'Clever', 'Funny'],
+                desc: 'The most horrid boy in the world — and proud of it. Henry is a self-proclaimed genius who would rather eat worms than tidy his room. He\'s cunning, loud, lazy about school work, and endlessly creative when it comes to schemes for getting what he wants. Despite his horrible behaviour, Henry is fiercely loyal to his best friend Ralph and has a surprisingly good heart buried deep beneath all the mischief.'
+            },
+            {
+                id: 'peter', name: 'Perfect Peter', emoji: '😇', role: 'Henry\'s Brother',
+                tagline: 'The Worm',
+                image: 'https://kimi-web-img.moonshot.cn/img/static.wikia.nocookie.net/24ba0ee53c3761488cfd26de08b1f1c07ae991cb',
+                glow: '#05d9e8',
+                traits: ['Goody Two-Shoes', 'Tattle-tale', 'Smug'],
+                desc: 'Good as gold and twice as smug about it. Peter is everything Henry is not — tidy, polite, studious, and infuriatingly well-behaved. He is a card-carrying member of the Best Boy Club and loves vegetables, homework, and telling tales on Henry. While he appears angelic to adults, Peter has a sly competitive streak and can be incredibly smug.'
+            },
+            {
+                id: 'mum', name: 'Mum', emoji: '😤', role: 'Henry\'s Mum',
+                tagline: 'Long-suffering Mum',
+                image: 'https://kimi-web-img.moonshot.cn/img/static.wikia.nocookie.net/911953682a1cf11bd3fbcbd09a7c4195758004e7',
+                glow: '#b026ff',
+                traits: ['Patient', 'Exhausted', 'Loving'],
+                desc: 'Mum loves both her sons dearly, but Henry regularly tests her sanity. She tries to maintain order in the household with varying degrees of failure. Mum often gives in to Henry\'s demands just to get some peace and quiet. She\'s fond of yoga, healthy food (which Henry despises), and fantasising about a tidy house. Despite everything, she\'s endlessly forgiving.'
+            },
+            {
+                id: 'dad', name: 'Dad', emoji: '🤦', role: 'Henry\'s Dad',
+                tagline: 'The Pushover',
+                image: 'https://kimi-web-img.moonshot.cn/img/static.wikia.nocookie.net/47d006d4ba6ffe9688f3842eebd88b5dcb92b4a9',
+                glow: '#ffe66d',
+                traits: ['Easy-going', 'Pushover', 'Sporty'],
+                desc: 'Dad is easy-going and tries to be the reasonable parent, but Henry consistently breaks his resolve. He loves football, a quiet life, and reading the newspaper without interruption — three things Henry rarely allows. Dad has a tendency to make wild promises he can\'t keep and to take the path of least resistance. Despite his flaws, he\'s a warm-hearted father.'
+            },
+            {
+                id: 'ralph', name: 'Rude Ralph', emoji: '🤘', role: 'Best Mate',
+                tagline: 'Partner in Crime',
+                image: 'https://kimi-web-img.moonshot.cn/img/static.wikia.nocookie.net/015c48c3096a97a151db1c0f6e7d162a64a6997e',
+                glow: '#ff2a6d',
+                traits: ['Rude', 'Loyal', 'Loud'],
+                desc: 'Ralph is Henry\'s best friend and partner in crime. He\'s rude, brash, and gloriously unapologetic about it. Ralph is always ready to join Henry\'s schemes and can burp the national anthem. He\'s fiercely loyal and their friendship is one of the most genuine relationships in the series. While he\'s not quite as cunning as Henry, Ralph makes up for it in pure, unbridled rudeness.'
+            },
+            {
+                id: 'margaret', name: 'Moody Margaret', emoji: '😤', role: 'Nemesis',
+                tagline: 'The Next-Door Terror',
+                image: 'https://kimi-web-img.moonshot.cn/img/static.wikia.nocookie.net/0d179a8f4d4f4759041457d920fba7fa1b8eb905',
+                glow: '#ff2a6d',
+                traits: ['Bossy', 'Scheming', 'Bold'],
+                desc: 'Margaret is Henry\'s next-door neighbour and his greatest rival. She is bossy, cunning, and just as scheming as Henry — which is exactly why they\'re such good enemies. Margaret leads the Secret Club and Henry leads the Purple Hand Gang, and their battles for supremacy are legendary. Despite their constant arguing, there\'s an undeniable frisson — they are remarkably alike.'
+            },
+            {
+                id: 'susan', name: 'Sour Susan', emoji: '😒', role: 'Secret Club',
+                tagline: 'Margaret\'s Right-Hand Girl',
+                image: 'https://kimi-web-img.moonshot.cn/img/static.wikitide.net/81c80369617236d53ece313e9b2b4267f61101c3.jpeg',
+                glow: '#00f5d4',
+                traits: ['Grumpy', 'Loyal', 'Sharp'],
+                desc: 'Susan is Margaret\'s best friend, though "best" is relative since Margaret treats her terribly. Susan is perpetually sour-faced and complains constantly, yet keeps coming back for more. She has a sharp tongue and isn\'t afraid to use it, even on Margaret. Despite being bossed around, Susan has genuine moments of spine — she just rarely acts on them.'
+            },
+            {
+                id: 'miss-battle-axe', name: 'Miss Battle-Axe', emoji: '😤', role: 'Teacher',
+                tagline: 'The Terror Teacher',
+                image: 'https://kimi-web-img.moonshot.cn/img/static.tvtropes.org/324f2c22d103d973e5d3a25b608c2f7cd3796ff5.jpg',
+                glow: '#b026ff',
+                traits: ['Stern', 'Loud', 'Strict'],
+                desc: 'Miss Battle-Axe is Henry\'s formidable teacher and his sworn enemy. With a voice that could shatter glass and a glare that could stop traffic, she rules her classroom with an iron fist. She has very little patience for Henry\'s antics and seems to take personal affront at his existence. Outside school she\'s slightly more human — she secretly enjoys gardening and has a weakness for quiz shows.'
+            },
+            {
+                id: 'gurinder', name: 'Gorgeous Gurinder', emoji: '💅', role: 'Classmate',
+                tagline: 'The Fashion Icon',
+                image: 'https://kimi-web-img.moonshot.cn/img/static.wikia.nocookie.net/397b15aa44f225f5dfd72ccd073fe92b93d53e11',
+                glow: '#ff2a6d',
+                traits: ['Glamorous', 'Fashionable', 'Confident'],
+                desc: 'Gorgeous Gurinder is the most stylish student in Henry\'s class. She is obsessed with fashion, make-up (which she is not supposed to wear), and being generally fabulous. She looks down on Henry with the sort of withering contempt only the truly glamorous can manage. Despite her high-maintenance personality, she\'s surprisingly funny and has moments of genuine wit.'
+            },
+            {
+                id: 'andrew', name: 'Anxious Andrew', emoji: '😟', role: 'Classmate',
+                tagline: 'Worry Champion',
+                image: 'https://kimi-web-img.moonshot.cn/img/static.wikia.nocookie.net/490a6a30e56970569b1c2092d4cc2b4fd4a36d91',
+                glow: '#05d9e8',
+                traits: ['Anxious', 'Kind', 'Gentle'],
+                desc: 'Andrew is Henry\'s classmate who worries about absolutely everything — from whether the sky will fall to whether his shoelaces are tied correctly. He is gentle, kind-hearted, and deeply anxious, which makes him an unlikely friend for someone as boldly chaotic as Henry. Andrew gets roped into schemes he\'d rather not be part of but is too polite to refuse.'
+            },
+            {
+                id: 'clare', name: 'Clever Clare', emoji: '🤓', role: 'Classmate',
+                tagline: 'The Brainiac',
+                image: 'https://kimi-web-img.moonshot.cn/img/static.wikia.nocookie.net/ab1cf4dd9eb22d58389e3f53083e5603cab4d249',
+                glow: '#ffe66d',
+                traits: ['Brilliant', 'Precise', 'Competitive'],
+                desc: 'Clare is impossibly clever — the sort of student who finishes tests early and then reads ahead. She corrects teachers (politely), knows five languages (including ancient ones), and considers being the best a basic expectation, not an achievement. She and Perfect Peter share a mutual admiration society. Henry finds her insufferable; she finds Henry\'s grades statistically alarming.'
+            },
+            {
+                id: 'graham', name: 'Greedy Graham', emoji: '🍕', role: 'Classmate',
+                tagline: 'The Snack King',
+                image: 'https://kimi-web-img.moonshot.cn/img/static.wikia.nocookie.net/52d4fe4e39209fd2bcebe83a4b2300db0da4998c',
+                glow: '#ff9f1c',
+                traits: ['Hungry', 'Generous', 'Easy-going'],
+                desc: 'Graham\'s defining characteristic is his spectacular appetite. He is always eating, always thinking about eating, or negotiating his next eating opportunity. This makes him a popular friend — he shares generously — but also a liability at school events where food is present. Graham is good-natured and easy to please; just don\'t stand between him and the last biscuit.'
+            },
+            {
+                id: 'william', name: 'Weepy William', emoji: '😭', role: 'Classmate',
+                tagline: 'The Emotional One',
+                image: 'https://kimi-web-img.moonshot.cn/img/static.wikia.nocookie.net/25c15b467c915458e931f1c9004071cca47bd33b',
+                glow: '#05d9e8',
+                traits: ['Sensitive', 'Kind', 'Empathetic'],
+                desc: 'William cries. A lot. Happy things, sad things, mildly inconvenient things — all are equal triggers for William\'s impressive tear ducts. He\'s not weak; he\'s simply intensely feeling. William is deeply empathetic and genuinely distressed by injustice, which means Henry\'s schemes regularly set him off. Despite his emotional transparency, he\'s one of the more likeable kids in the class.'
+            },
+            {
+                id: 'sam', name: 'Spotless Sam', emoji: '🧹', role: 'Classmate',
+                tagline: 'The Clean Freak',
+                image: 'https://kimi-web-img.moonshot.cn/img/static.wikia.nocookie.net/2974271fefbcf925bf626d0fc38de2111af36e7e',
+                glow: '#00f5d4',
+                traits: ['Neat', 'Precise', 'Particular'],
+                desc: 'Sam is obsessed with cleanliness and order. He carries spare napkins, abhors mud, and has strong opinions about the correct way to fold things. Sam is the natural opposite of Henry in almost every way, which makes their occasional forced proximity at school deeply uncomfortable for both of them. Despite his fastidious nature, Sam has a surprisingly dark sense of humour when cornered.'
+            },
+            {
+                id: 'miss-lovely', name: 'Miss Lovely', emoji: '🌸', role: 'Teacher',
+                tagline: 'Peter\'s Favourite Teacher',
+                image: 'https://kimi-web-img.moonshot.cn/img/static.wikia.nocookie.net/8d593f8b378d987e700bac41796fa57072f94794',
+                glow: '#ff69b4',
+                traits: ['Kind', 'Patient', 'Warm'],
+                desc: 'Miss Lovely is Peter\'s teacher and the polar opposite of Miss Battle-Axe. She is warm, encouraging, and genuinely loves teaching. Peter worships her and she is endlessly patient and kind. She believes in positive reinforcement and makes learning feel like a treat. Henry finds her terrifyingly cheerful. Parents love her. She may be the only teacher in the school who actually enjoys Monday mornings.'
+            }
+        ];
+
+        // Render Characters
+        const grid = document.getElementById('characterGrid');
+        characters.forEach(char => {
+            const card = document.createElement('div');
+            card.className = 'character-card reveal';
+            card.style.setProperty('--card-glow', char.glow);
+            card.innerHTML = `
+                <div class="char-image-wrap">
+                    <img src="${char.image}" alt="${char.name}" loading="lazy">
+                </div>
+                <div class="char-info">
+                    <div class="char-emoji">${char.emoji}</div>
+                    <div class="char-name">${char.name}</div>
+                    <div class="char-role">${char.role}</div>
+                    <div class="char-tagline">"${char.tagline}"</div>
+                </div>
+            `;
+            card.addEventListener('click', () => openModal(char));
+            grid.appendChild(card);
+        });
+
+        // Modal Logic
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalBody = document.getElementById('modalBody');
+
+        function openModal(char) {
+            modalBody.innerHTML = `
+                <div class="modal-header">
+                    <img src="${char.image}" alt="${char.name}" class="modal-img" style="border-color: ${char.glow}; box-shadow: 0 0 30px ${char.glow}40;">
+                    <div class="modal-title">
+                        <div class="char-emoji" style="font-size: 2rem;">${char.emoji}</div>
+                        <h3 class="gradient-text">${char.name}</h3>
+                        <div class="role">${char.role} — ${char.tagline}</div>
+                    </div>
+                </div>
+                <div class="modal-traits">
+                    ${char.traits.map(t => `<span class="trait-pill">${t}</span>`).join('')}
+                </div>
+                <p class="modal-desc">${char.desc}</p>
+            `;
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Particle Canvas
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null };
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+                this.color = Math.random() > 0.5 ? 'rgba(255, 42, 109, 0.5)' : 'rgba(176, 38, 255, 0.5)';
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 60; i++) particles.push(new Particle());
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            // Connect nearby particles
+            particles.forEach((a, i) => {
+                particles.slice(i + 1).forEach(b => {
+                    const dx = a.x - b.x;
+                    const dy = a.y - b.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(176, 38, 255, ${0.1 * (1 - dist / 150)})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(a.x, a.y);
+                        ctx.lineTo(b.x, b.y);
+                        ctx.stroke();
+                    }
+                });
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Timeline Reveal
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        timelineItems.forEach(item => timelineObserver.observe(item));
+
+        // Animated Counters
+        const statNumbers = document.querySelectorAll('.stat-number');
+        let counted = false;
+        const statsSection = document.querySelector('.stats');
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !counted) {
+                    counted = true;
+                    statNumbers.forEach(stat => {
+                        const target = parseInt(stat.getAttribute('data-target'));
+                        const duration = 2000;
+                        const increment = target / (duration / 16);
+                        let current = 0;
+                        const update = () => {
+                            current += increment;
+                            if (current < target) {
+                                stat.textContent = Math.floor(current);
+                                requestAnimationFrame(update);
+                            } else {
+                                stat.textContent = target;
+                            }
+                        };
+                        update();
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statsObserver.observe(statsSection);
+
+        // 3D Card Tilt
+        document.querySelectorAll('.character-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 15;
+                const rotateY = (centerX - x) / 15;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
