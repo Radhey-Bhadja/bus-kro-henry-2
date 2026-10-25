@@ -36,6 +36,9 @@
             color: var(--text);
             overflow-x: hidden;
             line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         ::-webkit-scrollbar {
@@ -71,8 +74,8 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 20px 50px;
-            background: rgba(5, 5, 8, 0.8);
+            padding: 18px 50px;
+            background: rgba(5, 5, 8, 0.85);
             backdrop-filter: blur(20px);
             z-index: 1000;
             display: flex;
@@ -85,12 +88,18 @@
             font-weight: 900;
             font-size: 1.5rem;
             letter-spacing: -0.5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: inherit;
         }
 
         .nav-links {
             display: flex;
-            gap: 35px;
+            gap: 12px;
             list-style: none;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
         .nav-links a {
@@ -98,34 +107,93 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 0.95rem;
-            transition: 0.3s;
+            transition: all 0.3s ease;
             position: relative;
+            padding: 8px 18px;
+            border-radius: 50px;
+            border: 1px solid transparent;
         }
 
         .nav-links a:hover {
             color: var(--text);
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple));
-            transition: 0.3s;
+        .nav-links a.active {
+            color: #fff;
+            background: linear-gradient(135deg, rgba(255, 42, 109, 0.2), rgba(176, 38, 255, 0.2));
+            border-color: rgba(255, 42, 109, 0.45);
+            box-shadow: 0 0 20px rgba(176, 38, 255, 0.25);
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
+        /* Page Container & Views */
+        main {
+            flex: 1;
+            position: relative;
+        }
+
+        .page-section {
+            display: none;
+            min-height: calc(100vh - 180px);
+            animation: pageFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .page-section.active-page {
+            display: block;
+        }
+
+        .page-section.hero.active-page {
+            display: flex;
+        }
+
+        @keyframes pageFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Page Navigation Controls (Bottom of each page) */
+        .page-pager {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            padding: 10px 20px 70px;
+            flex-wrap: wrap;
+        }
+
+        .pager-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 26px;
+            border-radius: 50px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .pager-btn:hover {
+            background: linear-gradient(135deg, rgba(255, 42, 109, 0.2), rgba(176, 38, 255, 0.2));
+            border-color: var(--neon-pink);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 42, 109, 0.2);
         }
 
         /* Hero Section */
         .hero {
             position: relative;
             min-height: 100vh;
-            display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
@@ -176,14 +244,23 @@
             font-size: 1.3rem;
             color: var(--text-dim);
             max-width: 600px;
-            margin: 0 auto 40px;
+            margin: 0 auto 30px;
             animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 35px;
+            animation: fadeInUp 1s ease 0.5s both;
         }
 
         .hero-image {
             width: 100%;
             max-width: 700px;
-            margin: 40px auto 0;
+            margin: 20px auto 0;
             position: relative;
             animation: float 6s ease-in-out infinite;
         }
@@ -195,20 +272,10 @@
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(176, 38, 255, 0.2);
         }
 
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-            color: var(--text-dim);
-            font-size: 1.5rem;
-        }
-
         /* Section Headers */
         .section-header {
             text-align: center;
-            padding: 100px 20px 60px;
+            padding: 130px 20px 60px;
         }
 
         .section-header h2 {
@@ -231,7 +298,7 @@
             gap: 30px;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 50px 100px;
+            padding: 0 50px 60px;
         }
 
         .stat-card {
@@ -294,7 +361,7 @@
         .characters {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 50px 100px;
+            padding: 0 50px 60px;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 30px;
@@ -531,7 +598,7 @@
         .episodes {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 0 50px 100px;
+            padding: 0 50px 60px;
             position: relative;
         }
 
@@ -540,7 +607,7 @@
             left: 50%;
             transform: translateX(-50%);
             width: 2px;
-            height: 100%;
+            height: calc(100% - 60px);
             background: linear-gradient(180deg, var(--neon-purple), var(--neon-pink), var(--neon-cyan));
             opacity: 0.3;
         }
@@ -640,7 +707,7 @@
         .books {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 50px 100px;
+            padding: 0 50px 60px;
             display: grid;
             grid-template-columns: 1fr 1.5fr;
             gap: 60px;
@@ -731,8 +798,9 @@
         /* Footer */
         footer {
             border-top: 1px solid var(--border);
-            padding: 60px 50px 30px;
+            padding: 60px 50px 35px;
             text-align: center;
+            background: rgba(5, 5, 8, 0.95);
         }
 
         .footer-logo {
@@ -750,7 +818,7 @@
             display: flex;
             justify-content: center;
             gap: 50px;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
             flex-wrap: wrap;
         }
 
@@ -769,6 +837,41 @@
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+        }
+
+        .footer-creator {
+            margin: 25px 0 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: 1rem;
+            color: var(--text-dim);
+            font-weight: 600;
+        }
+
+        .creator-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 25px rgba(255, 42, 109, 0.35);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .creator-btn:hover {
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 12px 30px rgba(176, 38, 255, 0.55), 0 0 20px rgba(255, 42, 109, 0.4);
+            border-color: var(--neon-cyan);
         }
 
         /* Animations */
@@ -813,12 +916,30 @@
                 padding-right: 0;
             }
             .timeline-dot { left: 20px; transform: none; }
-            nav { padding: 15px 20px; }
-            .nav-links { display: none; }
-            .characters { padding: 0 20px 80px; }
-            .stats { padding: 0 20px 80px; }
-            .episodes { padding: 0 20px 80px; }
-            .books { padding: 0 20px 80px; }
+            nav {
+                padding: 12px 16px;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .nav-links {
+                gap: 6px;
+                justify-content: center;
+            }
+            .nav-links a {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+            .section-header {
+                padding: 150px 20px 40px;
+            }
+            .hero {
+                padding: 150px 20px 60px;
+            }
+            .characters { padding: 0 20px 60px; }
+            .stats { padding: 0 20px 60px; }
+            .episodes { padding: 0 20px 60px; }
+            .books { padding: 0 20px 60px; }
+            .book-list { grid-template-columns: 1fr; }
             .modal-header { flex-direction: column; text-align: center; }
         }
 
@@ -838,173 +959,197 @@
 
     <!-- Navigation -->
     <nav>
-        <div class="nav-logo gradient-text">HORRID HENRY</div>
+        <button type="button" class="nav-logo gradient-text" data-page-target="home">HORRID HENRY</button>
         <ul class="nav-links">
-            <li><a href="#characters">Characters</a></li>
-            <li><a href="#episodes">Episodes</a></li>
-            <li><a href="#books">Books</a></li>
-            <li><a href="#stats">Stats</a></li>
+            <li><a href="#home" class="nav-item active" data-page="home">Home</a></li>
+            <li><a href="#characters" class="nav-item" data-page="characters">Characters</a></li>
+            <li><a href="#episodes" class="nav-item" data-page="episodes">Episodes</a></li>
+            <li><a href="#books" class="nav-item" data-page="books">Books</a></li>
+            <li><a href="#stats" class="nav-item" data-page="stats">Stats</a></li>
         </ul>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <canvas id="particleCanvas"></canvas>
-        <div class="hero-content">
-            <div class="hero-badge">⚡ The Most Horrid Website Ever ⚡</div>
-            <h1 class="gradient-text">HORRID HENRY</h1>
-            <p class="hero-subtitle">Explore every scheming, shouting, sneaky character from the world's most gloriously misbehaved TV show. <strong>15 characters. 250 episodes. 24+ books.</strong></p>
-            <div class="hero-image">
-                <img src="https://kimi-web-img.moonshot.cn/img/www.animationmagazine.net/ca3e007b9ebae3e6f7d91cbe12ced6ffbe3addb9.jpg" alt="Horrid Henry Cast">
+    <main>
+        <!-- Page 1: Hero / Home Section -->
+        <section id="home" class="page-section hero active-page">
+            <canvas id="particleCanvas"></canvas>
+            <div class="hero-content">
+                <div class="hero-badge">⚡ The Most Horrid Website Ever ⚡</div>
+                <h1 class="gradient-text">HORRID HENRY</h1>
+                <p class="hero-subtitle">Explore every scheming, shouting, sneaky character from the world's most gloriously misbehaved TV show. <strong>15 characters. 250 episodes. 24+ books.</strong></p>
+                <div class="hero-cta-group">
+                    <button type="button" class="pager-btn" data-page-target="characters">Explore Characters →</button>
+                    <button type="button" class="pager-btn" data-page-target="episodes">TV Timeline</button>
+                    <button type="button" class="pager-btn" data-page-target="books">Book Series</button>
+                    <button type="button" class="pager-btn" data-page-target="stats">View Stats</button>
+                </div>
+                <div class="hero-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.animationmagazine.net/ca3e007b9ebae3e6f7d91cbe12ced6ffbe3addb9.jpg" alt="Horrid Henry Cast">
+                </div>
             </div>
-        </div>
-        <div class="scroll-indicator">↓</div>
-    </section>
+        </section>
 
-    <!-- Stats -->
-    <section id="stats">
-        <div class="section-header reveal">
-            <h2 class="gradient-text-yellow">By The Numbers</h2>
-            <p>The sheer scale of horridness across books, TV, and beyond.</p>
-        </div>
-        <div class="stats">
-            <div class="stat-card reveal">
-                <div class="stat-icon">👥</div>
-                <div class="stat-number" data-target="15">0</div>
-                <div class="stat-label">Main Characters</div>
+        <!-- Page 2: Characters -->
+        <section id="characters" class="page-section">
+            <div class="section-header reveal visible">
+                <h2 class="gradient-text">The Characters</h2>
+                <p>15 unforgettable characters — click any card to reveal their full profile.</p>
             </div>
-            <div class="stat-card reveal">
-                <div class="stat-icon">📺</div>
-                <div class="stat-number" data-target="250">0</div>
-                <div class="stat-label">TV Episodes</div>
+            <div class="characters" id="characterGrid"></div>
+            <div class="page-pager">
+                <button type="button" class="pager-btn" data-page-target="home">← Back to Home</button>
+                <button type="button" class="pager-btn" data-page-target="episodes">Next: TV Episodes →</button>
             </div>
-            <div class="stat-card reveal">
-                <div class="stat-icon">📚</div>
-                <div class="stat-number" data-target="24">0</div>
-                <div class="stat-label">Book Titles</div>
-            </div>
-            <div class="stat-card reveal">
-                <div class="stat-icon">🏆</div>
-                <div class="stat-number" data-target="5">0</div>
-                <div class="stat-label">TV Seasons</div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Characters -->
-    <section id="characters">
-        <div class="section-header reveal">
-            <h2 class="gradient-text">The Characters</h2>
-            <p>15 unforgettable characters — click any card to reveal their full profile.</p>
-        </div>
-        <div class="characters" id="characterGrid"></div>
-    </section>
-
-    <!-- Episodes -->
-    <section id="episodes">
-        <div class="section-header reveal">
-            <h2 class="gradient-text-yellow">TV Series Timeline</h2>
-            <p>From 2006 to 2019 — five seasons of horrid adventures on CITV and Nicktoons.</p>
-        </div>
-        <div class="episodes">
-            <div class="timeline-line"></div>
-            <div class="timeline-item reveal">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <span class="timeline-year">2006 — 2007</span>
-                    <h3>Season 1</h3>
-                    <p>The chaos begins! 52 episodes introducing Henry, Peter, Margaret, and the whole gang. Premiered on CITV.</p>
-                    <span class="ep-count">52 Episodes</span>
-                </div>
+        <!-- Page 3: Episodes -->
+        <section id="episodes" class="page-section">
+            <div class="section-header reveal visible">
+                <h2 class="gradient-text-yellow">TV Series Timeline</h2>
+                <p>From 2006 to 2019 — five seasons of horrid adventures on CITV and Nicktoons.</p>
             </div>
-            <div class="timeline-item reveal">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <span class="timeline-year">2008 — 2009</span>
-                    <h3>Season 2</h3>
-                    <p>Another 52 episodes. Henry's pranks get bigger, the Secret Club gets stronger, and the Purple Hand Gang fights back!</p>
-                    <span class="ep-count">52 Episodes</span>
+            <div class="episodes">
+                <div class="timeline-line"></div>
+                <div class="timeline-item reveal visible">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2006 — 2007</span>
+                        <h3>Season 1</h3>
+                        <p>The chaos begins! 52 episodes introducing Henry, Peter, Margaret, and the whole gang. Premiered on CITV.</p>
+                        <span class="ep-count">52 Episodes</span>
+                    </div>
                 </div>
-            </div>
-            <div class="timeline-item reveal">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <span class="timeline-year">2010 — 2011</span>
-                    <h3>Season 3</h3>
-                    <p>52 more episodes! Aired alongside the 2011 live-action movie "Horrid Henry: The Movie" in 3D.</p>
-                    <span class="ep-count">52 Episodes</span>
+                <div class="timeline-item reveal visible">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2008 — 2009</span>
+                        <h3>Season 2</h3>
+                        <p>Another 52 episodes. Henry's pranks get bigger, the Secret Club gets stronger, and the Purple Hand Gang fights back!</p>
+                        <span class="ep-count">52 Episodes</span>
+                    </div>
                 </div>
-            </div>
-            <div class="timeline-item reveal">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <span class="timeline-year">2014 — 2015</span>
-                    <h3>Season 4</h3>
-                    <p>Another 52 episodes bringing the total to 208. Henry becomes more of a scapegoat while Margaret gets more devious.</p>
-                    <span class="ep-count">52 Episodes</span>
+                <div class="timeline-item reveal visible">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2010 — 2011</span>
+                        <h3>Season 3</h3>
+                        <p>52 more episodes! Aired alongside the 2011 live-action movie "Horrid Henry: The Movie" in 3D.</p>
+                        <span class="ep-count">52 Episodes</span>
+                    </div>
                 </div>
-            </div>
-            <div class="timeline-item reveal">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <span class="timeline-year">2018 — 2019</span>
-                    <h3>Season 5</h3>
-                    <p>Final 42 episodes on Nicktoons UK. The series became the #3 most-watched animation in Britain!</p>
-                    <span class="ep-count">42 Episodes</span>
+                <div class="timeline-item reveal visible">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2014 — 2015</span>
+                        <h3>Season 4</h3>
+                        <p>Another 52 episodes bringing the total to 208. Henry becomes more of a scapegoat while Margaret gets more devious.</p>
+                        <span class="ep-count">52 Episodes</span>
+                    </div>
                 </div>
-            </div>
-            <div class="timeline-item reveal">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <span class="timeline-year">2011 & 2020+</span>
-                    <h3>Movie & Specials</h3>
-                    <p>Live-action 3D movie in 2011, followed by Netflix specials like "Gross Day Out" and "Wild Weekend" from 2020.</p>
-                    <span class="ep-count">Bonus Content</span>
+                <div class="timeline-item reveal visible">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2018 — 2019</span>
+                        <h3>Season 5</h3>
+                        <p>Final 42 episodes on Nicktoons UK. The series became the #3 most-watched animation in Britain!</p>
+                        <span class="ep-count">42 Episodes</span>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Books -->
-    <section id="books">
-        <div class="section-header reveal">
-            <h2 class="gradient-text">The Book Series</h2>
-            <p>Written by Francesca Simon and illustrated by the legendary Tony Ross since 1994.</p>
-        </div>
-        <div class="books">
-            <div class="book-visual reveal">
-                <div class="book-3d">
-                    <img src="https://kimi-web-img.moonshot.cn/img/d3ddkgxe55ca6c.cloudfront.net/4e95fd28ad4d42c9c806811f7c1316dc6d998bd2.jpg" alt="Horrid Henry Book">
-                </div>
-            </div>
-            <div class="book-info reveal">
-                <h3 class="gradient-text-yellow">24+ Bestselling Titles</h3>
-                <p>The Horrid Henry book series has sold over <strong>25 million copies</strong> worldwide! Published by Orion Children's Books, translated into 24 languages, and winner of countless awards.</p>
-                <p>From the original <em>Horrid Henry</em> (1994) to <em>Horrid Henry: Up, Up and Away</em> (2019), follow Henry's most horrid moments in short, hilarious chapters perfect for reluctant readers.</p>
-                <ul class="book-list">
-                    <li>Horrid Henry (1994)</li>
-                    <li>Horrid Henry and the Secret Club (1995)</li>
-                    <li>Horrid Henry Tricks the Tooth Fairy (1996)</li>
-                    <li>Horrid Henry's Nits (1997)</li>
-                    <li>Horrid Henry Gets Rich Quick (2000)</li>
-                    <li>Horrid Henry's Haunted House (1999)</li>
-                    <li>Horrid Henry and the Mummy's Curse (2001)</li>
-                    <li>Horrid Henry's Revenge (2001)</li>
-                    <li>Horrid Henry and the Bogey Babysitter (2002)</li>
-                    <li>Horrid Henry's Stinkbomb (2002)</li>
-                    <li>Horrid Henry's Underpants (2003)</li>
-                    <li>Horrid Henry Meets the Queen (2004)</li>
-                </ul>
-                <div class="author-credit">
-                    <div class="icon">✍️</div>
-                    <div>
-                        <strong>Francesca Simon & Tony Ross</strong>
-                        <span>Author & Illustrator — Over 25 million copies sold worldwide</span>
+                <div class="timeline-item reveal visible">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2011 & 2020+</span>
+                        <h3>Movie & Specials</h3>
+                        <p>Live-action 3D movie in 2011, followed by Netflix specials like "Gross Day Out" and "Wild Weekend" from 2020.</p>
+                        <span class="ep-count">Bonus Content</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+            <div class="page-pager">
+                <button type="button" class="pager-btn" data-page-target="characters">← Back to Characters</button>
+                <button type="button" class="pager-btn" data-page-target="books">Next: The Books →</button>
+            </div>
+        </section>
+
+        <!-- Page 4: Books -->
+        <section id="books" class="page-section">
+            <div class="section-header reveal visible">
+                <h2 class="gradient-text">The Book Series</h2>
+                <p>Written by Francesca Simon and illustrated by the legendary Tony Ross since 1994.</p>
+            </div>
+            <div class="books">
+                <div class="book-visual reveal visible">
+                    <div class="book-3d">
+                        <img src="https://kimi-web-img.moonshot.cn/img/d3ddkgxe55ca6c.cloudfront.net/4e95fd28ad4d42c9c806811f7c1316dc6d998bd2.jpg" alt="Horrid Henry Book">
+                    </div>
+                </div>
+                <div class="book-info reveal visible">
+                    <h3 class="gradient-text-yellow">24+ Bestselling Titles</h3>
+                    <p>The Horrid Henry book series has sold over <strong>25 million copies</strong> worldwide! Published by Orion Children's Books, translated into 24 languages, and winner of countless awards.</p>
+                    <p>From the original <em>Horrid Henry</em> (1994) to <em>Horrid Henry: Up, Up and Away</em> (2019), follow Henry's most horrid moments in short, hilarious chapters perfect for reluctant readers.</p>
+                    <ul class="book-list">
+                        <li>Horrid Henry (1994)</li>
+                        <li>Horrid Henry and the Secret Club (1995)</li>
+                        <li>Horrid Henry Tricks the Tooth Fairy (1996)</li>
+                        <li>Horrid Henry's Nits (1997)</li>
+                        <li>Horrid Henry Gets Rich Quick (2000)</li>
+                        <li>Horrid Henry's Haunted House (1999)</li>
+                        <li>Horrid Henry and the Mummy's Curse (2001)</li>
+                        <li>Horrid Henry's Revenge (2001)</li>
+                        <li>Horrid Henry and the Bogey Babysitter (2002)</li>
+                        <li>Horrid Henry's Stinkbomb (2002)</li>
+                        <li>Horrid Henry's Underpants (2003)</li>
+                        <li>Horrid Henry Meets the Queen (2004)</li>
+                    </ul>
+                    <div class="author-credit">
+                        <div class="icon">✍️</div>
+                        <div>
+                            <strong>Francesca Simon & Tony Ross</strong>
+                            <span>Author & Illustrator — Over 25 million copies sold worldwide</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-pager">
+                <button type="button" class="pager-btn" data-page-target="episodes">← Back to Episodes</button>
+                <button type="button" class="pager-btn" data-page-target="stats">Next: By The Numbers →</button>
+            </div>
+        </section>
+
+        <!-- Page 5: Stats -->
+        <section id="stats" class="page-section">
+            <div class="section-header reveal visible">
+                <h2 class="gradient-text-yellow">By The Numbers</h2>
+                <p>The sheer scale of horridness across books, TV, and beyond.</p>
+            </div>
+            <div class="stats">
+                <div class="stat-card reveal visible">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-number" data-target="15">0</div>
+                    <div class="stat-label">Main Characters</div>
+                </div>
+                <div class="stat-card reveal visible">
+                    <div class="stat-icon">📺</div>
+                    <div class="stat-number" data-target="250">0</div>
+                    <div class="stat-label">TV Episodes</div>
+                </div>
+                <div class="stat-card reveal visible">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-number" data-target="24">0</div>
+                    <div class="stat-label">Book Titles</div>
+                </div>
+                <div class="stat-card reveal visible">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-number" data-target="5">0</div>
+                    <div class="stat-label">TV Seasons</div>
+                </div>
+            </div>
+            <div class="page-pager">
+                <button type="button" class="pager-btn" data-page-target="books">← Back to Books</button>
+                <button type="button" class="pager-btn" data-page-target="home">Back to Home 🏠</button>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer>
@@ -1027,6 +1172,12 @@
                 <div class="num">1</div>
                 <div class="label">True King</div>
             </div>
+        </div>
+        <div class="footer-creator">
+            <span>Made by</span>
+            <a href="https://bus-kro-henry.vercel.app/" target="_blank" rel="noopener noreferrer" class="creator-btn">
+                Radhey Bhadja ↗
+            </a>
         </div>
         <p style="font-size: 0.85rem; opacity: 0.5;">Based on the series by Francesca Simon & Tony Ross. TV series by Novel Entertainment & Nelvana.</p>
     </footer>
@@ -1168,7 +1319,7 @@
         const grid = document.getElementById('characterGrid');
         characters.forEach(char => {
             const card = document.createElement('div');
-            card.className = 'character-card reveal';
+            card.className = 'character-card reveal visible';
             card.style.setProperty('--card-glow', char.glow);
             card.innerHTML = `
                 <div class="char-image-wrap">
@@ -1183,6 +1334,98 @@
             `;
             card.addEventListener('click', () => openModal(char));
             grid.appendChild(card);
+        });
+
+        // Animated Counters Function
+        const statNumbers = document.querySelectorAll('.stat-number');
+        function animateStatCounters() {
+            statNumbers.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-target'), 10);
+                const duration = 1200;
+                const increment = target / (duration / 16);
+                let current = 0;
+                stat.textContent = '0';
+                const update = () => {
+                    current += increment;
+                    if (current < target) {
+                        stat.textContent = Math.floor(current);
+                        requestAnimationFrame(update);
+                    } else {
+                        stat.textContent = target;
+                    }
+                };
+                update();
+            });
+        }
+
+        // Page-Wise Navigation Logic
+        const pageSections = document.querySelectorAll('.page-section');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        function navigateToPage(pageId) {
+            const targetSection = document.getElementById(pageId);
+            if (!targetSection) return;
+
+            pageSections.forEach(sec => {
+                sec.classList.remove('active-page');
+            });
+            targetSection.classList.add('active-page');
+
+            navItems.forEach(link => {
+                if (link.getAttribute('data-page') === pageId) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Trigger animations/resizes specific to the active page
+            if (pageId === 'home') {
+                resizeCanvas();
+            } else if (pageId === 'stats') {
+                animateStatCounters();
+            }
+
+            // Ensure reveal elements inside the activated page become visible
+            targetSection.querySelectorAll('.reveal, .timeline-item').forEach((el, idx) => {
+                el.classList.remove('visible');
+                setTimeout(() => {
+                    el.classList.add('visible');
+                }, idx * 60);
+            });
+        }
+
+        // Attach Navbar Link Listeners
+        navItems.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = link.getAttribute('data-page');
+                navigateToPage(pageId);
+                try {
+                    history.replaceState(null, '', '#' + pageId);
+                } catch (err) {}
+            });
+        });
+
+        // Attach Page Target Button Listeners (Logo & Pager buttons)
+        document.querySelectorAll('[data-page-target]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const pageId = btn.getAttribute('data-page-target');
+                navigateToPage(pageId);
+                try {
+                    history.replaceState(null, '', '#' + pageId);
+                } catch (err) {}
+            });
+        });
+
+        // Handle URL Hash on Load or HashChange
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash && document.getElementById(hash)) {
+                navigateToPage(hash);
+            }
         });
 
         // Modal Logic
@@ -1225,7 +1468,6 @@
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        let mouse = { x: null, y: null };
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -1265,7 +1507,6 @@
                 p.update();
                 p.draw();
             });
-            // Connect nearby particles
             particles.forEach((a, i) => {
                 particles.slice(i + 1).forEach(b => {
                     const dx = a.x - b.x;
@@ -1285,61 +1526,6 @@
         }
         animateParticles();
 
-        // Scroll Reveal
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        revealElements.forEach(el => revealObserver.observe(el));
-
-        // Timeline Reveal
-        const timelineItems = document.querySelectorAll('.timeline-item');
-        const timelineObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.2 });
-
-        timelineItems.forEach(item => timelineObserver.observe(item));
-
-        // Animated Counters
-        const statNumbers = document.querySelectorAll('.stat-number');
-        let counted = false;
-        const statsSection = document.querySelector('.stats');
-
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !counted) {
-                    counted = true;
-                    statNumbers.forEach(stat => {
-                        const target = parseInt(stat.getAttribute('data-target'));
-                        const duration = 2000;
-                        const increment = target / (duration / 16);
-                        let current = 0;
-                        const update = () => {
-                            current += increment;
-                            if (current < target) {
-                                stat.textContent = Math.floor(current);
-                                requestAnimationFrame(update);
-                            } else {
-                                stat.textContent = target;
-                            }
-                        };
-                        update();
-                    });
-                }
-            });
-        }, { threshold: 0.5 });
-
-        statsObserver.observe(statsSection);
-
         // 3D Card Tilt
         document.querySelectorAll('.character-card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
@@ -1356,6 +1542,12 @@
                 card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
             });
         });
+
+        // Initial hash check if opened with a hash
+        const initialHash = window.location.hash.replace('#', '');
+        if (initialHash && document.getElementById(initialHash)) {
+            navigateToPage(initialHash);
+        }
     </script>
 </body>
 </html>
